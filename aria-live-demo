@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIA Live Demo</title>
+    <style>
+        #liveRegion {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>ARIA Live Region Example</h1>
+    <button id="updateButton">Update Live Region</button>
+
+    <div id="liveRegion" aria-live="polite">
+        Diese Region ist dynamisch. Screen-Reader werden Veränderungen vorlesen
+    </div>
+
+    <script>
+        let updateCount = 0;
+
+        document.getElementById('updateButton').addEventListener('click', function() {
+            updateCount++;
+            document.getElementById('liveRegion').textContent = 
+                `Region wurde ${updateCount}x aktualisiert.`;
+        });
+    </script>
+</body>
+</html>
