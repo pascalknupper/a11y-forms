@@ -3,32 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARIA Live Demo</title>
+    <title>ARIA Live Region Beispiel - Polite und Assertive</title>
     <style>
-        #liveRegion {
+        #liveRegionPolite {
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 20px;
             background-color: #f9f9f9;
         }
+        #liveRegionAssertive {
+            border: 1px solid #ff0000;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #ffe6e6;
+        }
     </style>
 </head>
 <body>
-    <h1>ARIA Live Region Example</h1>
-    <button id="updateButton">Update Live Region</button>
+    <h1>ARIA Live Region Beispiel - Polite und Assertive</h1>
 
-    <div id="liveRegion" aria-live="polite">
-        Diese Region ist dynamisch. Screen-Reader werden Veränderungen vorlesen
+    <button id="updateButtonPolite">Update Live Region Polite</button>
+    <div id="liveRegionPolite" aria-live="polite">
+        Dies ist eine Live-Region mit polite. Aktualisierungen werden in der nächsten Gelegenheit angekündigt.
+    </div>
+
+    <button id="updateButtonAssertive">Update Live Region Assertive</button>
+    <div id="liveRegionAssertive" aria-live="assertive">
+        Dies ist eine Live-Region mit assertive. Aktualisierungen werden sofort angekündigt.
     </div>
 
     <script>
-        let updateCount = 0;
+        let updateCountPolite = 0;
+        let updateCountAssertive = 0;
 
-        document.getElementById('updateButton').addEventListener('click', function() {
-            updateCount++;
-            document.getElementById('liveRegion').textContent = 
-                `Region wurde ${updateCount}x aktualisiert.`;
+        document.getElementById('updateButtonPolite').addEventListener('click', function() {
+            updateCountPolite++;
+            document.getElementById('liveRegionPolite').textContent = 
+                `Live-Region polite aktualisiert ${updateCountPolite} Mal(e).`;
+        });
+
+        document.getElementById('updateButtonAssertive').addEventListener('click', function() {
+            updateCountAssertive++;
+            document.getElementById('liveRegionAssertive').textContent = 
+                `Live-Region assertive aktualisiert ${updateCountAssertive} Mal(e).`;
         });
     </script>
 </body>
 </html>
+
+
+
+
