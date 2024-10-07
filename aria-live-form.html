@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARIA Live Region Beispiel - Inline-Validierung</title>
+    <style>
+        #liveRegion {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formular mit Inline-Validierung</h1>
+    <form id="myForm">
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" required>
+        <button type="submit">Absenden</button>
+    </form>
+
+    <div id="liveRegion" aria-live="polite">
+        Bitte geben Sie Ihre E-Mail-Adresse ein.
+    </div>
+
+    <script>
+        const form = document.getElementById('myForm');
+        const emailInput = document.getElementById('email');
+        const liveRegion = document.getElementById('liveRegion');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das tatsächliche Absenden des Formulars
+            
+            if (emailInput.validity.valid) {
+                liveRegion.textContent = 'E-Mail erfolgreich gesendet!';
+                liveRegion.classList.remove('error');
+            } else {
+                liveRegion.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                liveRegion.classList.add('error');
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            liveRegion.textContent = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
+            liveRegion.classList.remove('error');
+        });
+    </script>
+</body>
+</html>
