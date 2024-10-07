@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARIA Live Region Beispiel - Inline-Validierung</title>
+    <title>ARIA Live Region Beispiel - Integer-Validierung</title>
     <style>
         #liveRegion {
             border: 1px solid #ccc;
@@ -17,37 +17,29 @@
     </style>
 </head>
 <body>
-    <h1>Formular mit Inline-Validierung</h1>
-    <form id="myForm">
-        <label for="email">E-Mail:</label>
-        <input type="email" id="email" required>
-        <button type="submit">Absenden</button>
-    </form>
-
+    <h1>Integer-Validierung</h1>
+    <label for="numberInput">Gib eine ganze Zahl ein:</label>
+    <input type="text" id="numberInput" aria-describedby="liveRegion">
+    
     <div id="liveRegion" aria-live="polite">
-        Bitte geben Sie Ihre E-Mail-Adresse ein.
+        Bitte gib eine ganze Zahl ein.
     </div>
 
     <script>
-        const form = document.getElementById('myForm');
-        const emailInput = document.getElementById('email');
+        const numberInput = document.getElementById('numberInput');
         const liveRegion = document.getElementById('liveRegion');
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Verhindert das tatsächliche Absenden des Formulars
-            
-            if (emailInput.validity.valid) {
-                liveRegion.textContent = 'E-Mail erfolgreich gesendet!';
+        numberInput.addEventListener('input', function() {
+            const value = numberInput.value;
+
+            // Check if the input is an integer
+            if (value === '' || /^\d+$/.test(value)) {
+                liveRegion.textContent = 'Das ist eine gültige ganze Zahl.';
                 liveRegion.classList.remove('error');
             } else {
-                liveRegion.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+                liveRegion.textContent = 'Bitte gib eine gültige ganze Zahl ein.';
                 liveRegion.classList.add('error');
             }
-        });
-
-        emailInput.addEventListener('input', function() {
-            liveRegion.textContent = 'Bitte geben Sie Ihre E-Mail-Adresse ein.';
-            liveRegion.classList.remove('error');
         });
     </script>
 </body>
