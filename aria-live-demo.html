@@ -4,31 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARIA Live Region Beispiel - Polite und Assertive</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         #liveRegionPolite {
-            border: 1px solid #ccc;
-            padding: 10px;
             margin-top: 20px;
-            background-color: #f9f9f9;
         }
         #liveRegionAssertive {
-            border: 1px solid #ff0000;
-            padding: 10px;
             margin-top: 20px;
-            background-color: #ffe6e6;
         }
     </style>
 </head>
-<body>
-    <h1>ARIA Live Region Beispiel - Polite und Assertive</h1>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold mb-4">ARIA Live Region Beispiel - Polite und Assertive</h1>
 
-    <button id="updateButtonPolite">Update Live Region Polite</button>
-    <div id="liveRegionPolite" aria-live="polite">
+    <button id="updateButtonPolite" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 hover:bg-blue-600">
+        Update Live Region Polite
+    </button>
+    <div id="liveRegionPolite" aria-live="polite" class="border border-gray-300 p-3 bg-gray-50">
         Dies ist eine Live-Region mit polite. Aktualisierungen werden in der nächsten Gelegenheit angekündigt.
     </div>
 
-    <button id="updateButtonAssertive">Update Live Region Assertive</button>
-    <div id="liveRegionAssertive" aria-live="assertive">
+    <button id="updateButtonAssertive" class="bg-red-500 text-white px-4 py-2 rounded mb-4 hover:bg-red-600">
+        Update Live Region Assertive
+    </button>
+    <div id="liveRegionAssertive" aria-live="assertive" class="border border-red-500 p-3 bg-red-100">
         Dies ist eine Live-Region mit assertive. Aktualisierungen werden sofort angekündigt.
     </div>
 
@@ -50,7 +49,3 @@
     </script>
 </body>
 </html>
-
-
-
-

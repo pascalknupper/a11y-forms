@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARIA Live Region Beispiel - Integer-Validierung</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         #liveRegion {
-            border: 1px solid #ccc;
-            padding: 10px;
             margin-top: 20px;
-            background-color: #f9f9f9;
-        }
-        .error {
-            color: red;
         }
     </style>
 </head>
-<body>
-    <h1>Integer-Validierung</h1>
-    <label for="numberInput">Gib eine ganze Zahl ein:</label>
-    <input type="text" id="numberInput" aria-describedby="liveRegion">
-    
-    <div id="liveRegion" aria-live="polite">
+<body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold mb-4">Integer-Validierung</h1>
+    <label for="numberInput" class="block mb-2">Gib eine ganze Zahl ein:</label>
+    <input type="text" id="numberInput" aria-describedby="liveRegion" 
+           class="border border-gray-300 rounded p-2 mb-4 w-full">
+
+    <div id="liveRegion" aria-live="polite" class="border border-gray-300 p-3 mt-4 bg-gray-50">
         Bitte gib eine ganze Zahl ein.
     </div>
 
@@ -36,9 +32,11 @@
             if (value === '' || /^\d+$/.test(value)) {
                 liveRegion.textContent = 'Das ist eine gültige ganze Zahl.';
                 liveRegion.classList.remove('error');
+                liveRegion.classList.remove('text-red-500'); // Remove error class
             } else {
                 liveRegion.textContent = 'Bitte gib eine gültige ganze Zahl ein.';
                 liveRegion.classList.add('error');
+                liveRegion.classList.add('text-red-500'); // Add error class
             }
         });
     </script>
