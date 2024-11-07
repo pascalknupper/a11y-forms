@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTTO - Neues Passwort erstellen</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .progress-section {
+            width: 33.33%;
+            height: 100%;
+            background-color: lightgray;
+            border-right: 2px solid white;
+        }
+        .progress-section:last-child {
+            border-right: none;
+        }
+        .filled {
+            background-color: green;
+        }
+        .invalid {
+            background-color: red;
+        }
+        .input-container {
+                    position: relative;
+                    margin-bottom: 1rem;
+                }
+                .input-label {
+                    position: absolute;
+                    left: 12px;
+                    top: 1rem;
+                    transition: all 0.2s ease;
+                    color: gray;
+                    pointer-events: none;
+                    font-size: 1rem;
+                }
+                .input-field {
+                    padding: 1rem;
+                    width: 100%;
+                    outline: none;
+                    font-size: 1rem;
+                    transition: border-color 0.2s ease;
+                }
+                .input-field:focus + .input-label,
+                .input-field:not(:placeholder-shown) + .input-label {
+                    top: -20px;
+                }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold mb-4">Neues Passwort erstellen</h1>
+    <p class="mb-4">Dein altes Passwort verliert erst seine Gültigkeit, wenn du ein neues Passwort eingegeben hast.</p>
+    <br>
+    <div class="input-container">
+      <input class="input-field text-gray-700 leading-tight pr-10" id="password" type="password" placeholder=" ">
+        <label class="input-label" for="password">Passwort</label>
+        <p id="passwordHint" class="mt-2 text-gray-500">Dein Passwort sollte möglichst lang sein (20 Zeichen).</p>
+        <div class="flex items-center mt-2">
+            <div class="h-2 w-full bg-gray-200 rounded flex">
+                <div id="progressSection1" class="progress-section"></div>
+                <div id="progressSection2" class="progress-section"></div>
+                <div id="progressSection3" class="progress-section"></div>
+            </div>
+            <p id="strengthMessage" class="ml-4 text-gray-500 hidden"></p>
+        </div>
+
+    </div>
+    <button class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded mb-4 w-full">Speichern</button>
+    <h2 class="text-xl font-bold mb-4">Starke Passwörter enthalten</h2>
+    <p class="mb-2">Mindestens 8 Zeichen, Sonderzeichen, Zahlen zum Beispiel: q7yPv8!x@B</p>
+    <p class="mb-2">oder</p>
+    <p class="mb-2">20 Zeichen sind empfohlen, zum Beispiel: tisch4_himmel_kenja_blau_pfandkuchenteig</p>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const passwordHint = document.getElementById('passwordHint');
+        const strengthMessage = document.getElementById('strengthMessage');
+        const progressSections = [
+            document.getElementById('progressSection1'),
+            document.getElementById('progressSection2'),
+            document.getElementById('progressSection3')
+        ];
+
+        function updateHintAndProgressBar() {
+            const passwordLength = passwordInput.value.length;
+            let hintText = '';
+            let hintColor = 'text-gray-500';
+            let strengthText = '';
+
+            progressSections.forEach(section => {
+                section.className = 'progress-section';
+            });
+
+            passwordInput.className = 'input-field text-gray-700 leading-tight pr-10';
+
+            if (passwordLength === 0) {
+                hintText = '';
+                strengthText = '';
+                strengthMessage.classList.add('hidden');
+            } else if (passwordLength < 8) {
+                hintText = 'Zu kurz. Dein Passwort muss mindestens 8 Zeichen lang sein.';
+                hintColor = 'text-red-500';
+                strengthText = 'Ungültig';
+                progressSections[0].classList.add('invalid');
+                passwordInput.classList.add('border-red-500');
+            } else if (passwordLength > 20) {
+                hintText = 'Starkes Passwort';
+                hintColor = 'text-gray-500';
+                strengthText = 'Stark';
+                progressSections.forEach(section => {
+                    section.classList.add('filled');
+                });
+                passwordInput.classList.add('border-green-500');
+            } else {
+                hintText = 'Passwort ist in Ordnung. Für mehr Sicherheit nutze unsere Tipps für starke Passwörter.';
+                hintColor = 'text-gray-500';
+                strengthText = 'Okay';
+                progressSections[0].classList.add('filled');
+                progressSections[1].classList.add('filled');
+                passwordInput.classList.add('border-green-500');
+            }
+
+            passwordHint.textContent = hintText;
+            passwordHint.className = `mt-2 ${hintColor}`;
+
+            strengthMessage.textContent = strengthText;
+            strengthMessage.className = `ml-4 mt-2 ${hintColor}`;
+            strengthMessage.classList.remove('hidden');
+        }
+
+        passwordInput.addEventListener('blur', updateHintAndProgressBar);
+        passwordInput.addEventListener('input', updateHintAndProgressBar);
+    </script>
+</body>
+</html>
