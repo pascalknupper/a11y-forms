@@ -37,7 +37,7 @@
     <p class="mb-4">Dein altes Passwort verliert erst seine Gültigkeit, wenn du ein neues Passwort eingegeben hast.</p>
     <br>
     <div class="input-container">
-      <input class="input-field rounded text-gray-700 leading-tight pr-10 border-2 border-gray-300" id="password" type="password" placeholder=" ">
+      <input class="input-field rounded-lg text-gray-700 leading-tight pr-10 border-2 border-gray-300" id="password" type="password" placeholder=" ">
         <label class="input-label" for="password">Passwort</label>
         <p id="passwordHint" class="mt-2 text-gray-500">Dein Passwort sollte möglichst lang sein (20 Zeichen).</p>
     </div>
@@ -52,7 +52,7 @@
             let hintText = '';
             let hintColor = 'text-gray-500';
 
-            passwordInput.className = 'input-field text-gray-700 leading-tight pr-10 border-2 border-gray-300';
+            passwordInput.className = 'input-field rounded-lg text-gray-700 leading-tight pr-10 border-2 border-gray-300';
 
             if (passwordLength === 0) {
                 hintText = '';
