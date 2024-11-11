@@ -60,14 +60,13 @@
 
         function updateHint() {
             const passwordLength = passwordInput.value.length;
-            let hintText = '';
+            let hintText = 'Dein Passwort sollte möglichst lang sein (20 Zeichen).';
             let hintColor = 'text-gray-500';
 
             passwordInput.className = 'input-field rounded-lg text-gray-700 leading-tight pr-10 border-2 border-gray-300';
 
-            if (passwordLength === 0) {
-                hintText = '';
-            } else if (passwordLength > 20) {
+
+            if (passwordLength > 20) {
                 hintText = 'Starkes Passwort';
                 hintColor = 'text-gray-500';
                 passwordInput.classList.add('border-green-500');
